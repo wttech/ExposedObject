@@ -1,0 +1,9 @@
+A fast dynamic wrapper for accessing hidden methods and fields of .Net objects.
+
+TODO:
+- performance assessment (binding restrictions vs caching, compare with CreateDelegate solution)
+- documentation
+- overloads
+- generic methods
+- constructors
+- Exposed as generic method parameter in another Exposed invokation
