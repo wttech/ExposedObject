@@ -38,6 +38,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClassWithHiddenMethodsTest.cs" />
+    <Compile Include="OverloadedMethodsClassTest.cs" />
+    <Compile Include="GenericMethodClassTest.cs" />
     <Compile Include="StaticClassTest.cs" />
     <Compile Include="HiddenClassTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

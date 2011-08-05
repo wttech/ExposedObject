@@ -23,6 +23,7 @@ Thumbs.db
 *.lib
 *.sbr
 *.vs10x
+*.nupkg
 obj/
 [Rr]elease*/
 _ReSharper*/

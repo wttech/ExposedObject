@@ -32,9 +32,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ClassWithHiddenMethods.cs" />
+    <Compile Include="GenericMethodClass.cs" />
     <Compile Include="HiddenClass.cs" />
+    <Compile Include="OverloadedMethodsClass.cs" />
     <Compile Include="StaticClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

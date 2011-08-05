@@ -1,9 +1,25 @@
-A fast dynamic wrapper for accessing hidden methods and fields of .Net objects.
+Fast dynamic wrapper for accessing hidden methods and fields of .Net objects.
+
+EXAMPLES:
+
+Accessing private method on a visible type:
+	dynamic exposed = Exposed.From(new ClassWithHiddenMethods());
+	string password = exposed.GeneratePassword(8);
+
+Accessing private field on a hidden type:
+	dynamic exposed = Exposed.New(Type.GetType("TestSubjects.HiddenClass, TestSubjects"));
+    string password = exposed.password;
+
+Accessing internal static method of a hidden type:
+	dynamic exposed = Exposed.From(Type.GetType("TestSubjects.StaticClass, TestSubjects"));
+	decimal convertValue = exposed.ConvertValue(8);
 
 TODO:
 - performance assessment (binding restrictions vs caching, compare with CreateDelegate solution)
-- documentation
-- overloads
 - generic methods
 - constructors
-- Exposed as generic method parameter in another Exposed invokation
+
+Ideas borrowed from:
+http://bugsquash.blogspot.com/2009/05/testing-private-methods-with-c-40.html
+http://igoro.com/archive/use-c-dynamic-typing-to-conveniently-access-internals-of-an-object/
+http://tirania.org/blog/archive/2009/Aug-11.html

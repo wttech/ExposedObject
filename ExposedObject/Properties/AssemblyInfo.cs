@@ -31,7 +31,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("ExposedObject")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Fast dynamic wrapper for accessing hidden methods and fields of .Net objects.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Cognifide")]
 [assembly: AssemblyProduct("ExposedObject")]
