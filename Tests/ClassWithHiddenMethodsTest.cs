@@ -52,7 +52,7 @@ namespace Tests
             dynamic exposed = Exposed.New(typeof(ClassWithHiddenMethods));
             string password = exposed.GeneratePassword(8);
 
-            Assert.AreEqual(exposed.Password, password);
+            Assert.AreEqual(password, exposed.Password);
         }
 
         [Test]
@@ -65,6 +65,15 @@ namespace Tests
             exposed.Count = 9;
             count = exposed.Count;
             Assert.AreEqual(9, count);
+        }
+
+        [Test]
+        public void ReturnVoidMethodTest()
+        {
+            dynamic exposed = Exposed.From(new ClassWithHiddenMethods());
+            exposed.SetPassword("new test password");
+
+            Assert.AreEqual("new test password", exposed.password);
         }
     }
 }

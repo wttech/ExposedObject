@@ -52,7 +52,7 @@ namespace Tests
             dynamic exposed = Exposed.New(Type.GetType("TestSubjects.HiddenClass, TestSubjects"));
             string password = exposed.GeneratePassword(8);
 
-            Assert.AreEqual(exposed.Password, password);
+            Assert.AreEqual(password, exposed.Password);
         }
 
         [Test]

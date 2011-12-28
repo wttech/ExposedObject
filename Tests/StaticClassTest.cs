@@ -52,7 +52,7 @@ namespace Tests
             dynamic exposed = Exposed.From(Type.GetType("TestSubjects.StaticClass, TestSubjects"));
             decimal convertValue = exposed.ConvertValue(8);
 
-            Assert.AreEqual(exposed.Value, convertValue);
+            Assert.AreEqual(convertValue, exposed.Value);
         }
 
         [Test]

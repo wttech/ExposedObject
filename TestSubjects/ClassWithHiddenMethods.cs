@@ -50,5 +50,10 @@ namespace TestSubjects
             var random = new Random(seed);
             return password = random.Next().ToString();
         }
+
+        private void SetPassword(string newPassword)
+        {
+            password = newPassword;
+        }
     }
 }

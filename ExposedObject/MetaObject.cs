@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -73,10 +74,10 @@ namespace ExposedObject
                             ? null
                             : Expression.Convert(Expression.Field(Expression.Convert(self, typeof(Exposed)), "value"), type);
 
-            var target = Expression.Convert(Expression.Call(@this, method, argExps), binder.ReturnType);
+            var target = Expression.Call(@this, method, argExps);
             var restrictions = BindingRestrictions.GetTypeRestriction(self, typeof(Exposed));
 
-            return new DynamicMetaObject(target, restrictions);
+            return new DynamicMetaObject(ConvertExpressionType(binder.ReturnType, target), restrictions);
         }
 
         /// <summary>
@@ -165,6 +166,30 @@ namespace ExposedObject
             }
 
             return memberExpression;
+        }
+
+        /// <summary>
+        /// Coerces the expression type into the expected return type.
+        /// </summary>
+        /// <param name="expectedType">Type expeted at the dispatch site.</param>
+        /// <param name="target">Expression to coerce.</param>
+        /// <remarks>Dynamic dispatch expects a <see langword="void"/> method to return <see langword="null"/>.</remarks>
+        /// <returns>Target expression coerced to the required type.</returns>
+        private static Expression ConvertExpressionType(Type expectedType, Expression target)
+        {
+            if (target.Type == expectedType)
+            {
+                return target;
+            }
+            if (target.Type == typeof(void))
+            {
+                return Expression.Block(target, Expression.Default(expectedType));
+            }
+            if (expectedType == typeof(void))
+            {
+                return Expression.Block(target, Expression.Empty());
+            }
+            return Expression.Convert(target, expectedType);
         }
 
         /// <summary>
