@@ -23,6 +23,10 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Threading;
+
 using ExposedObject;
 
 using NUnit.Framework;
@@ -74,6 +78,38 @@ namespace Tests
             exposed.SetPassword("new test password");
 
             Assert.AreEqual("new test password", exposed.password);
+        }
+
+        [Test]
+        [Timeout(2000)]
+        public void ThreadingSafetySimpleTest()
+        {
+            var results = new ConcurrentDictionary<int, bool>();
+            const int threadsCount = 100;
+            var threads = new List<Thread>(threadsCount);
+            for (int i = 0; i < threadsCount; i++)
+            {
+                var thread = new Thread(
+                    o =>
+                        {
+                            var password = o.ToString();
+                            var number = (int)o;
+                            var exposed = Exposed.From(new ClassWithHiddenMethods());
+                            Thread.Sleep(threadsCount - number);
+                            exposed.SetPassword(password);
+                            Thread.Sleep(threadsCount - number);
+                            string read = exposed.Password;
+                            results[number] = password == read;
+                        });
+                threads.Add(thread);
+                thread.Start(i);
+            }
+            for (int i = 0; i < threadsCount; i++)
+            {
+                threads[i].Join();
+                Assert.True(results[i]);
+            }
+            Assert.AreEqual(threadsCount, results.Count);
         }
     }
 }
