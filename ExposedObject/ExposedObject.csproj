@@ -48,10 +48,6 @@
     <None Include="ExposedObject.snk" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PreBuildEvent>"$(SolutionDir)Tools\nuget" install "$(ProjectDir)packages.config" -o "$(SolutionDir)Packages"
-</PreBuildEvent>
-  </PropertyGroup>
   <Target Name="BeforeBuild">
   </Target>
   <PropertyGroup>
