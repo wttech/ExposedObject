@@ -1,7 +1,7 @@
 ﻿// Author:
 // Leszek Ciesielski (skolima@gmail.com)
 //
-// (C) 2011 Cognifide
+// (C) 2013 Cognifide
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -34,7 +34,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Cognifide")]
 [assembly: AssemblyProduct("TestSubjects")]
-[assembly: AssemblyCopyright("Copyright © Cognifide 2011")]
+[assembly: AssemblyCopyright("Copyright © Cognifide 2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -56,5 +56,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.1.0.0")]
-[assembly: AssemblyFileVersion("1.1.0.0")]
+[assembly: AssemblyVersion("1.2.0.0")]
+[assembly: AssemblyFileVersion("1.2.0.0")]

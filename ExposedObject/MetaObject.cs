@@ -1,4 +1,30 @@
-﻿using System;
+﻿// Author:
+// Leszek Ciesielski (skolima@gmail.com)
+// Manuel Josupeit-Walter (josupeit-walter@cis-gmbh.de)
+//
+// (C) 2013 Cognifide
+//
+// Permission is hereby granted, free of charge, to any person obtaining
+// a copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to
+// permit persons to whom the Software is furnished to do so, subject to
+// the following conditions:
+//
+// The above copyright notice and this permission notice shall be
+// included in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+// LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+// OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+// WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+//
+
+using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq.Expressions;
@@ -64,7 +90,14 @@ namespace ExposedObject
             }
 
             var type = exposed.SubjectType;
-            var method = type.GetMethod(binder.Name, GetBindingFlags(), null, argTypes, null);
+            var declaringType = type;
+            MethodInfo method;
+            do
+            {
+                method = declaringType.GetMethod(binder.Name, GetBindingFlags(), null, argTypes, null);
+            }
+            while (method == null && (declaringType = declaringType.BaseType) != null);
+
             if (method == null)
             {
                 throw new MissingMemberException(type.FullName, binder.Name);
@@ -144,25 +177,34 @@ namespace ExposedObject
         /// </exception>
         private MemberExpression GetMemberExpression(Expression self, string memberName)
         {
-            MemberExpression memberExpression;
+            MemberExpression memberExpression = null;
             var type = ((Exposed)Value).SubjectType;
             var @this = isStatic
                             ? null
                             : Expression.Convert(Expression.Field(Expression.Convert(self, typeof(Exposed)), "value"), type);
-            var property = type.GetProperty(memberName, GetBindingFlags());
-            if (property != null)
-            {
-                memberExpression = Expression.Property(@this, property);
-            }
-            else
-            {
-                var field = type.GetField(memberName, GetBindingFlags());
-                if (field == null)
-                {
-                    throw new MissingMemberException(type.FullName, memberName);
-                }
+            var declaringType = type;
 
-                memberExpression = Expression.Field(@this, field);
+            do
+            {
+                var property = declaringType.GetProperty(memberName, GetBindingFlags());
+                if (property != null)
+                {
+                    memberExpression = Expression.Property(@this, property);
+                }
+                else
+                {
+                    var field = declaringType.GetField(memberName, GetBindingFlags());
+                    if (field != null)
+                    {
+                        memberExpression = Expression.Field(@this, field);
+                    }
+                }
+            }
+            while (memberExpression == null && (declaringType = declaringType.BaseType) != null);
+
+            if (memberExpression == null)
+            {
+                throw new MissingMemberException(type.FullName, memberName);
             }
 
             return memberExpression;

@@ -1,7 +1,8 @@
 ﻿// Author:
 // Leszek Ciesielski (skolima@gmail.com)
+// Manuel Josupeit-Walter (josupeit-walter@cis-gmbh.de)
 //
-// (C) 2011 Cognifide
+// (C) 2013 Cognifide
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -53,15 +54,6 @@ namespace Tests
             string password = exposed.GeneratePassword(8);
 
             Assert.AreEqual(password, exposed.Password);
-        }
-
-        [Test]
-        [ExpectedException(typeof(MissingMemberException))]
-        public void PropertyFailedTest()
-        {
-            dynamic exposed = Exposed.New(Type.GetType("TestSubjects.HiddenClass, TestSubjects"));
-            int count = exposed.Count;
-            Assert.Fail("Private field is not accessible from a child class.");
         }
 
         [Test]

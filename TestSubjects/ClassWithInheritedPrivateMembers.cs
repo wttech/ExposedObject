@@ -24,39 +24,10 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System;
-
 namespace TestSubjects
 {
-    public class ClassWithHiddenMethods
+    public class ClassWithInheritedPrivateMembers : ClassWithHiddenMethods
     {
-        private int _count;
-
-        private int Count { get { return _count; } set { _count = value; } }
-
-        protected string password;
-
-        protected string Password
-        {
-            get
-            {
-                return password;
-            }
-            set
-            {
-                password = value;
-            }
-        }
-
-        protected string GeneratePassword(int seed)
-        {
-            var random = new Random(seed);
-            return password = random.Next().ToString();
-        }
-
-        private void SetPassword(string newPassword)
-        {
-            password = newPassword;
-        }
+         
     }
 }

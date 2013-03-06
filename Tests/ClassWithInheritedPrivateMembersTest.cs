@@ -24,39 +24,44 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System;
+using ExposedObject;
+using NUnit.Framework;
+using TestSubjects;
 
-namespace TestSubjects
+namespace Tests
 {
-    public class ClassWithHiddenMethods
+    [TestFixture]
+    public class ClassWithInheritedPrivateMembersTest
     {
-        private int _count;
-
-        private int Count { get { return _count; } set { _count = value; } }
-
-        protected string password;
-
-        protected string Password
+        [Test]
+        public void PrivatePropertyTest()
         {
-            get
-            {
-                return password;
-            }
-            set
-            {
-                password = value;
-            }
+            dynamic exposed = Exposed.From(new ClassWithInheritedPrivateMembers());
+            int count = exposed.Count;
+            Assert.AreEqual(0, count);
+            exposed.Count = 8;
+            count = exposed.Count;
+            Assert.AreEqual(8, count);
         }
 
-        protected string GeneratePassword(int seed)
+        [Test]
+        public void PrivateMethodTest()
         {
-            var random = new Random(seed);
-            return password = random.Next().ToString();
+            dynamic exposed = Exposed.From(new ClassWithInheritedPrivateMembers());
+            exposed.SetPassword("test pass");
+            string password = exposed.Password;
+            Assert.AreEqual("test pass", password);
         }
 
-        private void SetPassword(string newPassword)
+        [Test]
+        public void PrivateFieldTest()
         {
-            password = newPassword;
+            dynamic exposed = Exposed.From(new ClassWithInheritedPrivateMembers());
+            int count = exposed._count;
+            Assert.AreEqual(0, count);
+            exposed._count = 8;
+            count = exposed.Count;
+            Assert.AreEqual(8, count);
         }
     }
 }

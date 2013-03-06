@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ClassWithHiddenMethods.cs" />
+    <Compile Include="ClassWithInheritedPrivateMembers.cs" />
     <Compile Include="GenericMethodClass.cs" />
     <Compile Include="HiddenClass.cs" />
     <Compile Include="OverloadedMethodsClass.cs" />
