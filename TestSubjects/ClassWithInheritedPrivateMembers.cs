@@ -2,7 +2,7 @@
 // Leszek Ciesielski (skolima@gmail.com)
 // Manuel Josupeit-Walter (josupeit-walter@cis-gmbh.de)
 //
-// (C) 2013 Cognifide
+// (C) 2013 Wunderman Thompson Technology
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the

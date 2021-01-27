@@ -6,7 +6,7 @@
     <authors>$author$</authors>
     <owners>$author$</owners>
     <licenseUrl>http://www.opensource.org/licenses/mit-license.php</licenseUrl>
-    <projectUrl>https://github.com/Cognifide/ExposedObject</projectUrl>
+    <projectUrl>https://github.com/wttech/ExposedObject</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <tags>dynamic private invoke</tags>

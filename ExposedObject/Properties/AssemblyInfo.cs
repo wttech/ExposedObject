@@ -1,7 +1,7 @@
 ﻿// Author:
 // Leszek Ciesielski (skolima@gmail.com)
 //
-// (C) 2013 Cognifide
+// (C) 2013 Wunderman Thompson Technology
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -33,9 +33,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("ExposedObject")]
 [assembly: AssemblyDescription("Fast dynamic wrapper for accessing hidden methods and fields of .Net objects.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Cognifide")]
+[assembly: AssemblyCompany("Wunderman Thompson Technology")]
 [assembly: AssemblyProduct("ExposedObject")]
-[assembly: AssemblyCopyright("Copyright © Cognifide 2013")]
+[assembly: AssemblyCopyright("Copyright © Wunderman Thompson Technology 2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
